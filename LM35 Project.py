@@ -3,8 +3,8 @@ import requests
 import numpy # Import numpy
 import matplotlib.pyplot as plt
 from drawnow import *
-# %load_ext sql                                       # Use sql magic for convenient coding
-# %sql mysql+pymysql://root:@localhost/hr             # Connect local or online server for storing data
+%load_ext sql                                       # Use sql magic for convenient coding
+%sql mysql+pymysql://root:@localhost/hr             # Connect local or online server for storing data
 
 dweetIO= "https://dweet.io/dweet/for/"
 myname= "sensorDHT22"
@@ -16,13 +16,8 @@ arduinoData = serial.Serial('com7', 9600)            #Creating our serial object
 plt.ion()                                            #Tell matplotlib you want interactive mode to plot live data
 cnt=0
 
-# + language="sql"
-#
-# CREATE TABLE PARAMETERS ( 
-# 	Temperature(C) FLOAT
-# 	Humidity(RH) FLOAT
-# )
-# -
+
+%sql CREATE TABLE PARAMETERS ( Temperature(C) FLOAT, Humidity(RH) FLOAT)
 
 def makeFig():                                     #Create a function that makes our desired plot
     plt.ylim(20,40)                                  #Set y min and max values
@@ -49,7 +44,7 @@ while True:                                          # While loop that loops for
     H = float( dataArray[1])                         #Convert second element to floating number and put in H
     tempF.append(temp)                               #Build our tempF array by appending temp readings
     humidity.append(H)                               #Building our humidity array by appending H readings
-    # %sql INSERT INTO PARAMETERS(Temperature(C), Humidity(RH)) VALUES (temp, H)  #insert data to table in aql server
+    %sql INSERT INTO PARAMETERS(Temperature(C), Humidity(RH)) VALUES (temp, H)  #insert data to table in aql server
     drawnow(makeFig)                                 #Call drawnow to update our live graph
     plt.pause(.000001)                               #Pause Briefly. Important to keep drawnow from crashing
     cnt=cnt+1
