@@ -188,6 +188,7 @@ void loop() {
   Serial.print(f6);
   Serial.print("  ");
 
+  
   Serial.print("Humidity7: ");
   Serial.print(h7);
   Serial.print(" %\t");
