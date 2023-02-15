@@ -33,6 +33,7 @@ void loop() {
     digitalWrite(R1,HIGH);
     digitalWrite(R2,LOW);
   }
+    
   else if(y<=1023 && y>=600)
   {
     digitalWrite(R1,LOW);
